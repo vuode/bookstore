@@ -12,6 +12,7 @@ services:
       - '25003:3306'
     volumes:
       - mariadb_data:/var/lib/mysql
+    restart: always
   elasticsearch:
     image: elasticsearch:7.17.4
     environment:
@@ -19,6 +20,7 @@ services:
       - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
     volumes:
       - 'elasticsearch_data:/usr/share/elasticsearch/data'
+    restart: always
   magento:
     build:
       context: ./magento
@@ -27,6 +29,7 @@ services:
     depends_on:
       - mariadb
       - elasticsearch
+    restart: always
 volumes:
   mariadb_data:
     driver: local
